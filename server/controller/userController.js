@@ -345,7 +345,7 @@ class userController {
       if (!user) {
         return res
           .status(404)
-          .json({ status: "failed", message: "user not found" });
+          .json({ status: "failed", message: "User not found" });
       }
 
       jwt.verify(token, process.env.ACCESS_KEY);
