@@ -19,9 +19,6 @@ import Link from "next/link";
 
 // Validation schema using Yup
 const SignupSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(3, "Name must be at least 3 characters long")
-    .required("Name is required"),
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
@@ -38,7 +35,6 @@ const SignupForm = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: "",
       email: "",
       password: "",
     },
@@ -62,34 +58,6 @@ const SignupForm = () => {
         </CardHeader>
         <CardContent>
           <form onSubmit={formik.handleSubmit} className="space-y-6">
-            {/* Name Input */}
-            <div>
-              <Label htmlFor="name">Name</Label>
-              <div className="relative">
-                <User className="absolute h-5 w-5 left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <Input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Enter your name"
-                  value={formik.values.name}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  className={cn(
-                    "pl-10",
-                    formik.touched.name && formik.errors.name
-                      ? "border-red-500"
-                      : ""
-                  )}
-                />
-              </div>
-              {formik.touched.name && formik.errors.name && (
-                <div className="text-red-500 text-sm mt-1">
-                  {formik.errors.name}
-                </div>
-              )}
-            </div>
-
             {/* Email Input */}
             <div>
               <Label htmlFor="email">Email</Label>
@@ -160,16 +128,16 @@ const SignupForm = () => {
                 loading ? "text-gray-300 tracking-wider" : "text-white"
               } py-2 rounded-md`}
             >
-              {loading ? "Processing.." : "Sign Up"}
+              {loading ? "Processing.." : "Sign In"}
               {loading && <Loader />}
             </Button>
           </form>
         </CardContent>
         <CardFooter className="text-center">
           <p className="text-sm text-gray-500">
-            Already have an account?{" "}
-            <Link href="/signin" className="text-blue-600">
-              Sign In
+            Don't have an account?{" "}
+            <Link href="/signup" className="text-blue-600">
+              Sign Up
             </Link>
           </p>
         </CardFooter>
